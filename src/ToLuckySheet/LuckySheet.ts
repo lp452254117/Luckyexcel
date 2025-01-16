@@ -88,7 +88,6 @@ export class LuckySheet extends LuckySheetBase {
 
         this.generateConfigColumnLenAndHidden();
         let cellOtherInfo:IcellOtherInfo =  this.generateConfigRowLenAndHiddenAddCell();
-        
         if(this.calcChain==null){
             this.calcChain = [];
         }
@@ -110,8 +109,6 @@ export class LuckySheet extends LuckySheetBase {
             this.calcChain.push(chain);
             formulaListExist["r"+r+"c"+c] = null;
         }
-        
-
         if(this.formulaRefList!=null){
             for(let key in this.formulaRefList){
                 let funclist = this.formulaRefList[key];
@@ -133,7 +130,6 @@ export class LuckySheet extends LuckySheetBase {
                     let func = formulaTxt;
                     let offsetRow = r - mainR, offsetCol = c - mainC;
 
-                    
                     if(offsetRow > 0){
                         func = "=" + fromulaRef.functionCopy(func, "down", offsetRow);
                     }
@@ -151,7 +147,7 @@ export class LuckySheet extends LuckySheetBase {
                     // console.log(offsetRow, offsetCol, func);
 
                     (cellValue.v as IluckySheetCelldataValue ).f = func;
-                    
+
                     //添加共享公式链
                     let chain = new LuckysheetCalcChain();
                     chain.r = cellValue.r;
@@ -163,8 +159,8 @@ export class LuckySheet extends LuckySheetBase {
         }
 
 
-        //There may be formulas that do not appear in calcChain
-        for(let key in cellOtherInfo.formulaList){
+        // 可能存在未出现在 calcChain 中的公式
+        for(let key in cellOtherInfo.formulaList) {
             if(!(key in formulaListExist)){
                 let formulaListItem = cellOtherInfo.formulaList[key];
                 let chain = new LuckysheetCalcChain();
@@ -174,13 +170,13 @@ export class LuckySheet extends LuckySheetBase {
                 this.calcChain.push(chain);
             }
         }
-      
+
         // dataVerification config
         this.dataVerification = this.generateConfigDataValidations();
 
         // hyperlink config
         this.hyperlink = this.generateConfigHyperlinks();
-      
+
         // sheet hide
         this.hide = this.hide;
 
@@ -218,7 +214,7 @@ export class LuckySheet extends LuckySheetBase {
                     let xdr_blipfills = twoCellAnchor.getInnerElements("a:blip");
                     if(xdrFroms!=null && xdr_blipfills!=null && xdrFroms.length>0 && xdr_blipfills.length>0){
                         let xdrFrom = xdrFroms[0], xdrTo = xdrTos[0],xdr_blipfill = xdr_blipfills[0];
-                        
+
                         let rembed = getXmlAttibute(xdr_blipfill.attributeList, "r:embed", null);
 
                         let imageObject = this.getBase64ByRid(rembed, drawingRelsFile);
@@ -227,7 +223,7 @@ export class LuckySheet extends LuckySheetBase {
 
                         // let aoff = xdr_xfrm.getInnerElements("a:off"), aext = xdr_xfrm.getInnerElements("a:ext");
 
-                        
+
 
                         // if(aoff!=null && aext!=null && aoff.length>0 && aext.length>0){
                         //     let aoffAttribute = aoff[0].attributeList, aextAttribute = aext[0].attributeList;
@@ -256,7 +252,7 @@ export class LuckySheet extends LuckySheetBase {
 
                         imageObject.originWidth = cx_n;
                         imageObject.originHeight = cy_n;
-                        
+
                         if(editAs=="absolute"){
                             imageObject.type = "3";
                         }
@@ -304,8 +300,8 @@ export class LuckySheet extends LuckySheetBase {
                     }
                 }
             }
-            
-        } 
+
+        }
     }
 
     private getXdrValue(ele:Element[]):number{
@@ -356,7 +352,7 @@ export class LuckySheet extends LuckySheetBase {
             }
 
             let minNum = parseInt(min)-1, maxNum=parseInt(max)-1, widthNum=parseFloat(width);
-            
+
             for(let m=minNum;m<=maxNum;m++){
                 if(width!=null){
                     if(this.config.columnlen==null){
@@ -374,7 +370,7 @@ export class LuckySheet extends LuckySheetBase {
                     if(this.config.columnlen){
                         delete this.config.columnlen[m];
                     }
-                    
+
                 }
 
                 if(customWidth!=null){
@@ -383,7 +379,7 @@ export class LuckySheet extends LuckySheetBase {
                     }
                     this.config.customWidth[m] = 1;
                 }
-            } 
+            }
         }
     }
 
@@ -420,11 +416,11 @@ export class LuckySheet extends LuckySheetBase {
                     this.config.rowhidden = {};
                 }
                 this.config.rowhidden[rowNoNum] = 0;
-                
+
                 if(this.config.rowlen){
                     delete this.config.rowlen[rowNoNum];
                 }
-                
+
             }
 
             if(customHeight!=null){
@@ -447,7 +443,7 @@ export class LuckySheet extends LuckySheetBase {
                         this.config.borderInfo.push(cellValue._borderObject);
                         delete cellValue._borderObject;
                     }
-                    
+
                     // let borderId = cellValue._borderId;
                     // if(borderId!=null){
                     //     let borders = this.styles["borders"] as Element[];
@@ -463,7 +459,7 @@ export class LuckySheet extends LuckySheetBase {
                     //         borderObject.rangeType = "cellGroup";
                     //         borderObject.cells = [];
                     //         let borderCellValue = new LuckySheetborderInfoCellValue();
-                            
+
                     //         let lefts = border.getInnerElements("left");
                     //         let rights = border.getInnerElements("right");
                     //         let tops = border.getInnerElements("top");
@@ -547,20 +543,20 @@ export class LuckySheet extends LuckySheetBase {
 
                     this.celldata.push(cellValue);
                 }
-                
+
             }
         }
 
         return cellOtherInfo;
     }
-  
+
     /**
      * luckysheet config of dataValidations
-     * 
+     *
      * @returns {IluckysheetDataVerification} - dataValidations config
      */
     private generateConfigDataValidations(): IluckysheetDataVerification {
-      
+
       let rows = this.readXml.getElementsByTagName(
         "dataValidations/dataValidation",
         this.sheetFile
@@ -570,16 +566,16 @@ export class LuckySheet extends LuckySheetBase {
           "extLst/ext/x14:dataValidations/x14:dataValidation",
           this.sheetFile
         ) || [];
-      
+
       rows = rows.concat(extLst);
-  
+
       let dataVerification: IluckysheetDataVerification = {};
-  
+
       for (let i = 0; i < rows.length; i++) {
         let row = rows[i];
         let attrList = row.attributeList;
         let formulaValue = row.value;
-  
+
         let type = getXmlAttibute(attrList, "type", null);
         if(!type) {
             continue;
@@ -590,7 +586,7 @@ export class LuckySheet extends LuckySheetBase {
             valueArr: string[] = [];
         let _prohibitInput =
           getXmlAttibute(attrList, "allowBlank", null) !== "1" ? false : true;
-        
+
         // x14 processing
         const formulaReg = new RegExp(/<x14:formula1>|<xm:sqref>/g)
         if (formulaReg.test(formulaValue) && extLst?.length >= 0) {
@@ -612,12 +608,12 @@ export class LuckySheet extends LuckySheetBase {
         let _value2: string | number = valueArr?.length === 2 ? valueArr[1] : "";
         let _hint = getXmlAttibute(attrList, "prompt", null);
         let _hintShow = _hint ? true : false
-  
+
         const matchType = COMMON_TYPE2.includes(_type) ? "common" : _type;
         _type2 = operator
           ? DATA_VERIFICATION_TYPE2_MAP[matchType][operator]
           : "bw";
-        
+
         // mobile phone number processing
         if (
           _type === "text_content" &&
@@ -640,12 +636,12 @@ export class LuckySheet extends LuckySheetBase {
             .add(Number(_value2), "day")
             .format("YYYY-MM-DD");
         }
-        
+
         // checkbox and dropdown processing
         if (_type === "checkbox" || _type === "dropdown") {
           _type2 = null;
         }
-        
+
         // dynamically add dataVerifications
         for (const ref of sqrefIndexArr) {
           dataVerification[ref] = {
@@ -661,13 +657,13 @@ export class LuckySheet extends LuckySheetBase {
           };
         }
       }
-  
+
       return dataVerification;
     }
-  
+
     /**
      * luckysheet config of hyperlink
-     * 
+     *
      * @returns {IluckysheetHyperlink} - hyperlink config
      */
     private generateConfigHyperlinks(): IluckysheetHyperlink {
@@ -685,7 +681,7 @@ export class LuckySheet extends LuckySheetBase {
             _address = getXmlAttibute(attrList, "location", null),
             _tooltip = getXmlAttibute(attrList, "tooltip", null);
         let _type: IluckysheetHyperlinkType = _address ? "internal" : "external";
-  
+
         // external hyperlink
         if (!_address) {
           let rid = attrList["r:id"];
@@ -694,7 +690,7 @@ export class LuckySheet extends LuckySheetBase {
             "Relationships/Relationship",
             `xl/worksheets/_rels/${sheetFile.replace(worksheetFilePath, "")}.rels`
           );
-  
+
           const findRid = relationshipList?.find(
             (e) => e.attributeList["Id"] === rid
           );
@@ -712,7 +708,7 @@ export class LuckySheet extends LuckySheetBase {
         if (addressReg.test(_address)) {
           _address = getTransR1C1ToSequence(_address);
         }
-        
+
         // dynamically add hyperlinks
         for (const ref of refArr) {
           hyperlink[ref] = {
@@ -723,7 +719,7 @@ export class LuckySheet extends LuckySheetBase {
           };
         }
       }
-      
+
       return hyperlink;
     }
 

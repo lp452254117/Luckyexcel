@@ -1,5 +1,5 @@
 export interface ILuckyFile{
-    info:ILuckyFileInfo,//File information, name,password,date,createor etc. 
+    info:ILuckyFileInfo,//File information, name,password,date,createor etc.
     sheets:IluckySheet[],//Sheets, include all sheet data
 }
 
@@ -17,7 +17,7 @@ export interface IluckySheet{
     name:string,// Sheet name, it will show on sheet bar, must be unique
     color:string,// Sheet color, it will show on sheet bar
     config?:IluckySheetConfig, // Row height, column width, hidden, and so on
-    index:string, //A sheet uniquely identifies, 
+    index:string, //A sheet uniquely identifies,
     status:string, //If 1 , it means current shown sheet, else means hidden
     order:string, //Order of sheet
     row:number,// Sheet the number of rows, contain blank cell
@@ -38,7 +38,7 @@ export interface IluckySheet{
     freezen?:IluckysheetFrozen,
 
     calcChain?:IluckysheetCalcChain[],
-    
+
     zoomRatio:number, //sheet zoom ratio 10%-400%
 
     showGridLines:string, // show grid lines
@@ -47,7 +47,7 @@ export interface IluckySheet{
     defaultRowHeight:number, //row height pixel
 
     images:IluckyImages,//image list
-    
+
     dataVerification: IluckysheetDataVerification;
 		hyperlink: IluckysheetHyperlink, // hyperlinks
 		hide: number; // sheet hide
@@ -61,16 +61,16 @@ export interface IluckySheetSelection{
 }
 
 export interface IluckySheetChart{
-    
+
 }
 
 //pivot table interface
 export interface IluckySheetPivotTable{
     pivot_select_save:IluckySheetSelection,//Pivot table data source range
     pivotDataSheetIndex:string | undefined, //data source sheet index, index is unique id
-    column:IluckySheetPivotTableField[],// column area, include filed 
-    row:IluckySheetPivotTableField[], // row area, include filed 
-    filter:IluckySheetPivotTableField[], // filter area, include filed 
+    column:IluckySheetPivotTableField[],// column area, include filed
+    row:IluckySheetPivotTableField[], // row area, include filed
+    filter:IluckySheetPivotTableField[], // filter area, include filed
     filterparm: IluckySheetPivotTablefilterParam,// save param after apply filter
     values:IluckySheetPivotTableField[],
     showType:string,
@@ -152,25 +152,25 @@ export interface IluckySheetCelldata{
 }
 
 export interface IluckySheetCelldataValue{
-    ct:ILuckySheetCellFormat | undefined, //celltype,Cell value format: text, time, etc.
-    bg: string | undefined,//background,#fff000	
-    ff: string | undefined,//fontfamily,
-    fc: string | undefined,//fontcolor
-    bl: number | undefined,//Bold
-    it: number | undefined,//italic
-    fs: number | undefined,//font size	
-    cl: number | undefined,//Cancelline, 0 Regular, 1 Cancelline
-    un: number | undefined//underline, 0 Regular, 1 underlines, fonts
-    vt: number | undefined,//Vertical alignment, 0 middle, 1 up, 2 down
-    ht: number | undefined,//Horizontal alignment,0 center, 1 left, 2 right
-    mc: IluckySheetCelldataValueMerge | undefined, //Merge Cells
-    tr: number | undefined, //Text rotation,0: 0、1: 45 、2: -45、3 Vertical text、4: 90 、5: -90
-    tb: number | undefined, //Text wrap,0 truncation, 1 overflow, 2 word wrap
-    v: string | undefined, //Original value	
-    m: string | undefined, //Display value	
-    rt:number | undefined, //text rotation angle 0-180 alignment
-    f: string | undefined, //formula
-    qp:number | undefined //quotePrefix, show number as string
+    ct:ILuckySheetCellFormat | undefined, // 单元格类型，单元格值格式：文本，时间等
+    bg: string | undefined,//背景色,#fff000
+    ff: string | undefined,//字体,
+    fc: string | undefined,//字体颜色
+    bl: number | undefined,//加粗
+    it: number | undefined,//斜体
+    fs: number | undefined,//字体大小
+    cl: number | undefined,// 取消线, 0常规，1取消线
+    un: number | undefined// 下划线, 0 常规, 1 下划线
+    vt: number | undefined,// 垂直对齐, 0 中间, 1 上, 2 下
+    ht: number | undefined,// 水平对齐,0 居中, 1 左对齐, 2 右对齐
+    mc: IluckySheetCelldataValueMerge | undefined, // 合并单元格
+    tr: number | undefined, // 文字旋转 ,0: 0度、1: 45度 、2: -45度、3 竖排、4: 90度 、5: -90度
+    tb: number | undefined, // 文字换行,0 截断, 1 溢出, 2 自动换行
+    v: string | undefined, // 原始值
+    m: string | undefined, // 显示值
+    rt:number | undefined, // 文字旋转 angle 0-180
+    f: string | undefined, // 公式
+    qp:number | undefined //quotePrefix, 将数字显示为字符串
 }
 
 
@@ -202,7 +202,7 @@ export interface IluckySheetConfig{
 
 //Merge cells interface
 export interface IluckySheetConfigMerges{
-    [firstRange:string]:IluckySheetConfigMerge // "r_s":{ r,c,rs,cs } format, define a main merge cell 
+    [firstRange:string]:IluckySheetConfigMerge // "r_s":{ r,c,rs,cs } format, define a main merge cell
 }
 //Merge cell interface
 export interface IluckySheetConfigMerge{
@@ -248,12 +248,12 @@ export interface IluckySheetborderInfoCellForImp{
 
 //Border cell interface for import
 export interface IMapluckySheetborderInfoCellForImp{
-    [index:number]:IluckySheetborderInfoCellForImp 
+    [index:number]:IluckySheetborderInfoCellForImp
 }
 
 //row length and column length interface
 export interface IluckySheetRowAndColumnLen{
-    [index:string]:number 
+    [index:string]:number
 }
 
 //row and column hidden interface

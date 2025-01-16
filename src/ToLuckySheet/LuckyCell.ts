@@ -45,7 +45,6 @@ export class LuckySheetCelldata extends LuckySheetCelldataBase{
     private generateValue(s:string, t:string){
         let v = this.cell.getInnerElements("v");
         let f = this.cell.getInnerElements("f");
-
         if(v==null){
             v = this.cell.getInnerElements("t");
         }
@@ -74,7 +73,13 @@ export class LuckySheetCelldata extends LuckySheetCelldataBase{
             // console.log(ref, t, si);
             if(ref!=null || (formulaValue!=null && formulaValue.length>0)){
                 formulaValue = escapeCharacter(formulaValue);
-                cellValue.f = "=" + formulaValue;
+                // 解决公式解析出来的字符串自带=开头
+                if (formulaValue.startsWith("=")) {
+                    cellValue.f = formulaValue;
+                } else {
+                    cellValue.f = "=" + formulaValue;
+                }
+                console.log(cellValue.f);
             }
 
         }

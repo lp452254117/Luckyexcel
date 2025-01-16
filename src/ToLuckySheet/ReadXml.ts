@@ -7,7 +7,7 @@ class xmloperation {
     /**
     * @param tag Search xml tag name , div,title etc.
     * @param file Xml string
-    * @return Xml element string 
+    * @return Xml element string
     */
     protected getElementsByOneTag(tag:string, file:string):string[]{
         //<a:[^/>: ]+?>.*?</a:[^/>: ]+?>
@@ -24,7 +24,7 @@ class xmloperation {
         else{
             readTagReg = new RegExp("<"+ tag +" [^>]+?[^/]>[\\s\\S]*?</"+ tag +">|<"+ tag +" [^>]+?/>|<"+ tag +">[\\s\\S]*?</"+ tag +">|<"+ tag +"/>", "g");
         }
-        
+
         let ret = file.match(readTagReg);
         if(ret==null){
             return [];
@@ -47,7 +47,7 @@ export class ReadXml extends xmloperation{
     * @return Xml element calss
     */
     getElementsByTagName(path:string, fileName:string): Element[]{
-        
+
         let file = this.getFileByName(fileName);
         let pathArr = path.split("/"), ret:string[] | string;
         for(let key in pathArr){
@@ -71,7 +71,6 @@ export class ReadXml extends xmloperation{
         }
 
         let elements:Element[] = [];
-
         for(let i=0;i<ret.length;i++){
             let ele = new Element(ret[i]);
             elements.push(ele);
@@ -93,7 +92,7 @@ export class ReadXml extends xmloperation{
         return "";
     }
 
-    
+
 }
 
 export class Element extends xmloperation {
@@ -265,8 +264,8 @@ export function getColor(color:Element, styles:IStyleCollections , type:string="
                     // }
                     // else if((type=="t" || type=="b") && clrAttrList.val=="window"){
                     //     bg = null;
-                    // }                    
-                    // else 
+                    // }
+                    // else
                     if(clrAttrList.lastClr!=null){
                         bg = "#" + clrAttrList.lastClr;
                     }
@@ -281,9 +280,9 @@ export function getColor(color:Element, styles:IStyleCollections , type:string="
                 }
             }
         }
-        
+
     }
-    
+
     if(tint!=null){
         let tintNum = parseFloat(tint);
         if(bg!=null){
@@ -295,10 +294,10 @@ export function getColor(color:Element, styles:IStyleCollections , type:string="
 }
 
 
-/** 
+/**
  * @dom xml attribute object
  * @attr attribute name
- * @d if attribute is null, return default value 
+ * @d if attribute is null, return default value
  * @return attribute value
 */
 export function getlineStringAttr(frpr:Element, attr:string):string{
@@ -335,7 +334,7 @@ export function getlineStringAttr(frpr:Element, attr:string):string{
         else{
             value = attrEle[0].attributeList.val;
         }
-        
+
     }
 
     return value;

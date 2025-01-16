@@ -385,7 +385,6 @@ export class LuckyFile extends LuckyFileBase {
         //         sheet.config.borderInfo.push(b);
         //     }
         // }
-
         return this.toJsonString(this);
     }
 
@@ -500,19 +499,19 @@ export class LuckyFile extends LuckyFileBase {
             if(sheet.images!=null){
                 sheetout.images = sheet.images;
             }
-          
+
             if (sheet.dataVerification != null){
               sheetout.dataVerification = sheet.dataVerification;
             }
-          
+
             if (sheet.hyperlink != null){
                 sheetout.hyperlink = sheet.hyperlink;
             }
-          
+
             if (sheet.hide != null) {
               sheetout.hide = sheet.hide;
             }
-            
+
             LuckyOutPutFile.sheets.push(sheetout);
         });
 

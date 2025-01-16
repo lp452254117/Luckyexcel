@@ -13,9 +13,9 @@ import { fstat } from "fs";
 //     let downlodDemo = document.getElementById("Luckyexcel-downlod-file");
 //     let mask = document.getElementById("lucky-mask-demo");
 //     if(upload){
-        
+
 //         window.onload = () => {
-            
+
 //             upload.addEventListener("change", function(evt){
 //                 var files:FileList = (evt.target as any).files;
 //                 if(files==null || files.length==0){
@@ -30,14 +30,14 @@ import { fstat } from "fs";
 //                     return;
 //                 }
 //                 LuckyExcel.transformExcelToLucky(files[0], function(exportJson:any, luckysheetfile:string){
-                    
+
 //                     if(exportJson.sheets==null || exportJson.sheets.length==0){
 //                         alert("Failed to read the content of the excel file, currently does not support xls files!");
 //                         return;
 //                     }
 //                     console.log(exportJson, luckysheetfile);
 //                     window.luckysheet.destroy();
-                    
+
 //                     window.luckysheet.create({
 //                         container: 'luckysheet', //luckysheet is the container id
 //                         showinfobar:false,
@@ -58,7 +58,7 @@ import { fstat } from "fs";
 //                 }
 //                 mask.style.display = "flex";
 //                 LuckyExcel.transformExcelToLuckyByUrl(value, name, function(exportJson:any, luckysheetfile:string){
-                    
+
 //                     if(exportJson.sheets==null || exportJson.sheets.length==0){
 //                         alert("Failed to read the content of the excel file, currently does not support xls files!");
 //                         return;
@@ -66,7 +66,7 @@ import { fstat } from "fs";
 //                     console.log(exportJson, luckysheetfile);
 //                     mask.style.display = "none";
 //                     window.luckysheet.destroy();
-                    
+
 //                     window.luckysheet.create({
 //                         container: 'luckysheet', //luckysheet is the container id
 //                         showinfobar:false,
@@ -109,7 +109,7 @@ export class LuckyExcel{
         callback?: (files: IuploadfileList, fs?: string) => void,
         errorHandler?: (err: Error) => void) {
         let handleZip:HandleZip = new HandleZip(excelFile);
-        
+
         handleZip.unzipFile(function (files: IuploadfileList) {
             let luckyFile = new LuckyFile(files, excelFile.name);
             let luckysheetfile = luckyFile.Parse();
